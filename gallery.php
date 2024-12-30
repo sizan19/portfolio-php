@@ -1,17 +1,16 @@
 <?php 
-include_once 'includes/config.php';
+include_once 'includes/config.php'; // Include database connection and runQuery function
 
-// Fetch images from database
+// Fetch images from the database using the runQuery function
 $sql = "SELECT * FROM images ORDER BY uploaded_at DESC";
-$result = $conn->query($sql);
+$result = runQuery($sql); // No parameters required in this query
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Eternal Moments - Gallery</title>
-  <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
 <body>
   <!-- Navigation -->
@@ -41,14 +40,16 @@ $result = $conn->query($sql);
     <h1 class="text-center mb-4">Gallery</h1>
     <div class="row">
       <?php 
-      if ($result->num_rows > 0) {
+      if ($result && $result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
+          // Correct the image path to point to the correct directory
+          $imagePath = 'admin/' . $row['image_path'];
           ?>
           <div class="col-md-4 mb-4">
             <div class="card">
-              <img src="<?= $row['image_path'] ?>" class="card-img-top" alt="<?= $row['title'] ?>">
+              <img src="<?= htmlspecialchars($imagePath) ?>" class="card-img-top" alt="<?= htmlspecialchars($row['title']) ?>">
               <div class="card-body">
-                <h5 class="card-title"><?= $row['title'] ?></h5>
+                <h5 class="card-title"><?= htmlspecialchars($row['title']) ?></h5>
               </div>
             </div>
           </div>

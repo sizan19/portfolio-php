@@ -31,26 +31,76 @@
   </nav>
 
   <!-- Experience Content -->
-  <div class="container my-5">
+  <div class="container my-5 mt-5">
     <h1 class="text-center mb-4">Experience & Skills</h1>
-    <div class="row">
+    <div class="row mt-5">
       <div class="col-md-6">
-        <h2>Our Experience</h2>
-        <ul>
-          <li>5+ years of professional photography experience.</li>
-          <li>Covered over 200 events including weddings, concerts, and corporate events.</li>
-          <li>Worked with top brands for marketing campaigns and ad shoots.</li>
-        </ul>
+        <div class="card mb-4">
+          <div class="card-header bg-primary text-white">
+            <h2>Our Experience</h2>
+          </div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">5+ years of professional photography experience.</li>
+              <li class="list-group-item">Covered over 200 events including weddings, concerts, and corporate events.</li>
+              <li class="list-group-item">Worked with top brands for marketing campaigns and ad shoots.</li>
+            </ul>
+          </div>
+        </div>
       </div>
       <div class="col-md-6">
-        <h2>Skills & Awards</h2>
-        <ul>
-          <li>Portrait photography</li>
-          <li>Landscape & Nature photography</li>
-          <li>Expert in Photoshop & Lightroom</li>
-          <li>Winner of XYZ Photography Award, 2023</li>
-          <li>Published in “Photography Weekly” magazine</li>
-        </ul>
+        <div class="card mb-4">
+          <div class="card-header bg-success text-white">
+            <h2>Skills</h2>
+          </div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Portrait photography
+                <div class="progress">
+                  <div class="progress-bar bg-success" role="progressbar" style="width: 90%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">90%</div>
+                </div>
+              </li>
+              <li class="list-group-item">Landscape & Nature photography
+                <div class="progress">
+                  <div class="progress-bar bg-info" role="progressbar" style="width: 85%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">85%</div>
+                </div>
+              </li>
+              <li class="list-group-item">Expert in Photoshop & Lightroom
+                <div class="progress">
+                  <div class="progress-bar bg-warning" role="progressbar" style="width: 95%;" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">95%</div>
+                </div>
+              </li>
+              <li class="list-group-item">Event Photography
+                <div class="progress">
+                  <div class="progress-bar bg-danger" role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">80%</div>
+                </div>
+              </li>
+              <li class="list-group-item">Photo Editing
+                <div class="progress">
+                  <div class="progress-bar bg-primary" role="progressbar" style="width: 90%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">90%</div>
+                </div>
+              </li>
+              <li class="list-group-item">Studio Lighting
+                <div class="progress">
+                  <div class="progress-bar bg-secondary" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="card mb-4">
+          <div class="card-header bg-info text-white">
+            <h2>Awards & Publications</h2>
+          </div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Winner of XYZ Photography Award, 2023</li>
+              <li class="list-group-item">Published in “Photography Weekly” magazine</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </div>

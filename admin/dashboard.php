@@ -1,39 +1,59 @@
 <?php
 session_start();
 if (!isset($_SESSION['admin_logged_in'])) {
-  header("Location: index.php");
-  exit;
+    header("Location: index.php");
+    exit;
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Dashboard - Eternal Moments</title>
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" 
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" 
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   <style>
-    /* Optional custom styling for the side navbar */
+    body {
+      background-color: #f8f9fa;
+    }
     .sidebar {
-      height: 100vh;           /* Make sidebar full screen height */
-      position: fixed;         /* Keep sidebar fixed */
-      top: 0;
-      left: 0;
-      overflow-y: auto;        /* Scroll if the sidebar content is too long */
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      background-color: #343a40;
+      min-height: 100vh;
+      padding-top: 20px;
+    }
+    .sidebar h4 {
+      color: #ffffff;
+      text-align: center;
+      margin-bottom: 20px;
     }
     .sidebar .nav-link {
-      color: #333;
+      color: #ffffff;
+      padding: 10px 15px;
+      border-radius: 5px;
+      margin: 5px 15px;
     }
-    .sidebar .nav-link.active {
-      background-color: #0d6efd;
-      color: #fff;
+    .sidebar .nav-link.active, .sidebar .nav-link:hover {
+      background-color: #495057;
+      color: #ffffff;
     }
-    /* Offset the main content so it doesn't hide behind the fixed sidebar */
+    .sidebar .nav-link i {
+      margin-right: 10px;
+    }
     .main-content {
-      margin-left: 220px;  /* same as the .col-md-2 (roughly 200-220px) width */
+      margin-left: 220px; /* Matches sidebar width */
       padding: 20px;
+    }
+    .main-content h1 {
+      font-size: 2rem;
+      color: #343a40;
+    }
+    .main-content p {
+      font-size: 1rem;
+      color: #6c757d;
     }
   </style>
 </head>
@@ -41,9 +61,9 @@ if (!isset($_SESSION['admin_logged_in'])) {
 <div class="container-fluid">
   <div class="row">
     <!-- Side Navbar -->
-    <nav class="col-md-2 bg-danger-subtle sidebar">
-      <h4 class="pb-3 border-bottom m-4">Admin Panel</h4>
-      <ul class="nav flex-column mt-5">
+    <nav class="col-md-2 sidebar">
+      <h4>Admin Panel</h4>
+      <ul class="nav flex-column">
         <li class="nav-item">
           <a class="nav-link active" href="dashboard.php">
             <i class="bi bi-house-door"></i> Dashboard
@@ -71,15 +91,12 @@ if (!isset($_SESSION['admin_logged_in'])) {
     <div class="main-content col-md-10 ms-sm-auto">
       <h1>Welcome to the Admin Dashboard</h1>
       <p>Use the side navigation to manage your portfolio items, upload images, or check messages.</p>
-      <!-- Additional dashboard content goes here -->
+      <!-- Additional dashboard content -->
     </div>
   </div>
 </div>
 
-<!-- Bootstrap Icons (optional) -->
-<link rel="stylesheet" 
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-<!-- Bootstrap JavaScript Bundle -->
+<!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

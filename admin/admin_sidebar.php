@@ -1,5 +1,5 @@
 <!-- admin_sidebar.php -->
-<nav class="col-md-2 bg-danger-subtle sidebar p-3">
+<nav class="col-md-2 sidebar p-3">
   <h4 class="pb-3 border-bottom">Admin Panel</h4>
   <ul class="nav flex-column">
     <li class="nav-item">

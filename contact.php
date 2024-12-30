@@ -1,20 +1,23 @@
-<?php 
-include_once 'includes/config.php';
+<?php
+include_once 'includes/config.php'; // Include database connection and runQuery function
 
 if (isset($_POST['submit'])) {
-  $name = $_POST['name'];
-  $email = $_POST['email'];
-  $message = $_POST['message'];
+    // Sanitize user inputs
+    $name = htmlspecialchars(trim($_POST['name']));
+    $email = htmlspecialchars(trim($_POST['email']));
+    $message = htmlspecialchars(trim($_POST['message']));
 
-  $stmt = $conn->prepare("INSERT INTO messages (name, email, message) VALUES (?, ?, ?)");
-  $stmt->bind_param("sss", $name, $email, $message);
+    // Insert message into the database
+    $sql = "INSERT INTO messages (name, email, message) VALUES (?, ?, ?)";
+    $params = [$name, $email, $message];
 
-  if ($stmt->execute()) {
-    header("Location: thank_you.php"); // Redirect to a thank-you page
-    exit;
-  } else {
-    echo "Error: " . $stmt->error;
-  }
+    if (runQuery($sql, $params)) {
+        // Redirect to thank you page or show success message
+        header("Location: thank_you.php");
+        exit;
+    } else {
+        $error = "There was an error submitting your message. Please try again later.";
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -22,8 +25,26 @@ if (isset($_POST['submit'])) {
 <head>
   <meta charset="UTF-8">
   <title>Eternal Moments - Contact</title>
-  <link rel="stylesheet" 
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <style>
+    .container-contactus {
+      padding: 50px;
+      border-radius: 10px;
+      width: 50%;
+      height: 100%;
+      align-items: center;
+      background-color: #1a1a1a;
+      color: white;
+    }
+    .map-responsive iframe {
+      width: 100%;
+      height: 250px;
+      border: 0;
+    }
+    .form-label {
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
   <!-- Navigation -->
@@ -49,10 +70,25 @@ if (isset($_POST['submit'])) {
   </nav>
 
   <!-- Contact Form -->
-  <div class="container my-5">
+  <div class="bg-dark text-light container my-5 container-contactus">
     <h1 class="text-center mb-4">Contact Us</h1>
     <div class="row">
-      <div class="col-md-8 offset-md-2">
+      <div class="col-md-6">
+        <h3 class="mb-5">Our Office</h3>
+        <p><strong>Office Name:</strong> Eternal Moments</p>
+        <p><strong>Location:</strong> Koteshwor, Kathmandu</p>
+        <p><strong>Contact Number:</strong> +977 9843937012</p>
+        <!-- Google Maps Embed -->
+        <div class="map-responsive">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4255.149407666304!2d85.34653887604276!3d27.68873902631093!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb198bf9bd6c7d%3A0xb9e9193ddf9eda4f!2sISMT%20College!5e1!3m2!1sen!2snp!4v1735288333628!5m2!1sen!2snp" 
+            loading="lazy" allowfullscreen></iframe>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <?php if (isset($error)): ?>
+          <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
+        <?php endif; ?>
         <form method="POST" action="">
           <div class="mb-3">
             <label for="name" class="form-label">Name:</label>

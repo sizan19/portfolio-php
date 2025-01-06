@@ -96,8 +96,8 @@
           </div>
           <div class="card-body">
             <ul class="list-group list-group-flush">
-              <li class="list-group-item">Winner of XYZ Photography Award, 2023</li>
-              <li class="list-group-item">Published in “Photography Weekly” magazine</li>
+              <li class="list-group-item">Winner of Nepal's 12th Weeding Photography Award, 2023</li>
+              <li class="list-group-item">Published in “New York Photography Weekly” magazine</li>
             </ul>
           </div>
         </div>

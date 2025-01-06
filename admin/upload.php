@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['upload'])) {
         $_SESSION['error'] = "File is not a valid image.";
     } elseif (file_exists($targetFile)) {
         $_SESSION['error'] = "File already exists.";
-    } elseif ($image["size"] > 5000000) {
+    } elseif ($image["size"] > 50000000) {
         $_SESSION['error'] = "File is too large. Maximum size is 5MB.";
     } elseif (!in_array($imageFileType, ["jpg", "png", "jpeg", "gif"])) {
         $_SESSION['error'] = "Only JPG, JPEG, PNG, and GIF files are allowed.";

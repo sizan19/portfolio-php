@@ -21,7 +21,7 @@ if (isset($_POST['submit'])) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
 <head>
   <meta charset="UTF-8">
   <title>Eternal Moments - Contact</title>
@@ -31,8 +31,8 @@ if (isset($_POST['submit'])) {
       padding: 50px;
       border-radius: 10px;
       width: 50%;
-      height: 100%;
-      align-items: center;
+      /* Remove height:100% to allow flexbox to manage height
+         or keep it if you specifically need a tall container. */
       background-color: #1a1a1a;
       color: white;
     }
@@ -46,7 +46,7 @@ if (isset($_POST['submit'])) {
     }
   </style>
 </head>
-<body>
+<body class="d-flex flex-column h-100">
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
@@ -69,47 +69,50 @@ if (isset($_POST['submit'])) {
     </div>
   </nav>
 
-  <!-- Contact Form -->
-  <div class="bg-dark text-light container my-5 container-contactus">
-    <h1 class="text-center mb-4">Contact Us</h1>
-    <div class="row">
-      <div class="col-md-6">
-        <h3 class="mb-5">Our Office</h3>
-        <p><strong>Office Name:</strong> Eternal Moments</p>
-        <p><strong>Location:</strong> Koteshwor, Kathmandu</p>
-        <p><strong>Contact Number:</strong> +977 9843937012</p>
-        <!-- Google Maps Embed -->
-        <div class="map-responsive">
-          <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4255.149407666304!2d85.34653887604276!3d27.68873902631093!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb198bf9bd6c7d%3A0xb9e9193ddf9eda4f!2sISMT%20College!5e1!3m2!1sen!2snp!4v1735288333628!5m2!1sen!2snp" 
-            loading="lazy" allowfullscreen></iframe>
+  <!-- Main Content (flex-fill pushes footer down) -->
+  <main class="flex-fill">
+    <!-- Contact Form Container -->
+    <div class="bg-dark text-light container my-5 container-contactus">
+      <h1 class="text-center mb-4">Contact Us</h1>
+      <div class="row">
+        <div class="col-md-6">
+          <h3 class="mb-5">Our Office</h3>
+          <p><strong>Office Name:</strong> Eternal Moments</p>
+          <p><strong>Location:</strong> Koteshwor, Kathmandu</p>
+          <p><strong>Contact Number:</strong> +977 9843937012</p>
+          <!-- Google Maps Embed -->
+          <div class="map-responsive">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4255.149407666304!2d85.34653887604276!3d27.68873902631093!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb198bf9bd6c7d%3A0xb9e9193ddf9eda4f!2sISMT%20College!5e1!3m2!1sen!2snp!4v1735288333628!5m2!1sen!2snp" 
+              loading="lazy" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <?php if (isset($error)): ?>
+            <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
+          <?php endif; ?>
+          <form method="POST" action="">
+            <div class="mb-3">
+              <label for="name" class="form-label">Name:</label>
+              <input type="text" name="name" class="form-control" id="name" required>
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email:</label>
+              <input type="email" name="email" class="form-control" id="email" required>
+            </div>
+            <div class="mb-3">
+              <label for="message" class="form-label">Message:</label>
+              <textarea name="message" class="form-control" id="message" rows="5" required></textarea>
+            </div>
+            <button type="submit" name="submit" class="btn btn-primary">Send Message</button>
+          </form>
         </div>
       </div>
-      <div class="col-md-6">
-        <?php if (isset($error)): ?>
-          <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
-        <?php endif; ?>
-        <form method="POST" action="">
-          <div class="mb-3">
-            <label for="name" class="form-label">Name:</label>
-            <input type="text" name="name" class="form-control" id="name" required>
-          </div>
-          <div class="mb-3">
-            <label for="email" class="form-label">Email:</label>
-            <input type="email" name="email" class="form-control" id="email" required>
-          </div>
-          <div class="mb-3">
-            <label for="message" class="form-label">Message:</label>
-            <textarea name="message" class="form-control" id="message" rows="5" required></textarea>
-          </div>
-          <button type="submit" name="submit" class="btn btn-primary">Send Message</button>
-        </form>
-      </div>
     </div>
-  </div>
+  </main>
 
-  <!-- Footer -->
-  <footer class="bg-dark text-light py-3 text-center">
+  <!-- Footer (mt-auto ensures footer is pushed down) -->
+  <footer class="bg-dark text-light py-3 text-center mt-auto">
     <p>&copy; <?= date('Y') ?> Eternal Moments. All Rights Reserved.</p>
   </footer>
 

@@ -1,9 +1,9 @@
-<?php 
+<?php
 include_once 'includes/config.php'; // Include database connection and runQuery function
 
-// Fetch images from the database using the runQuery function
+// Fetch images from the database (currently sorted by newest first)
 $sql = "SELECT * FROM images ORDER BY uploaded_at DESC";
-$result = runQuery($sql); // No parameters required in this query
+$result = runQuery($sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,10 +11,29 @@ $result = runQuery($sql); // No parameters required in this query
   <meta charset="UTF-8">
   <title>Eternal Moments - Gallery</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <style>
+    /* Make the page take full height and use flex to push the footer down */
+    html, body {
+      height: 100%;
+      margin: 0; /* Remove default margin on the body */
+      padding: 0;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+    main {
+      flex: 1 0 auto; /* Allows the main content to grow and push footer down */
+      padding-top: 4.5rem; /* So main content is not hidden behind sticky navbar */
+    }
+    footer {
+      flex-shrink: 0; /* Footer won't shrink and will stay at bottom */
+    }
+  </style>
 </head>
 <body>
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <!-- Navigation (Sticky on top) -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
     <div class="container">
       <a class="navbar-brand" href="index.php">Eternal Moments</a>
       <button class="navbar-toggler" type="button" 
@@ -35,34 +54,55 @@ $result = runQuery($sql); // No parameters required in this query
     </div>
   </nav>
 
-  <!-- Gallery Content -->
-  <div class="container my-5">
-    <h1 class="text-center mb-4">Gallery</h1>
-    <div class="row">
-      <?php 
-      if ($result && $result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-          // Correct the image path to point to the correct directory
-          $imagePath = 'admin/' . $row['image_path'];
-          ?>
-          <div class="col-md-4 mb-4">
-            <div class="card">
-              <img src="<?= htmlspecialchars($imagePath) ?>" class="card-img-top" alt="<?= htmlspecialchars($row['title']) ?>">
-              <div class="card-body">
-                <h5 class="card-title"><?= htmlspecialchars($row['title']) ?></h5>
+  <!-- Main content area -->
+  <main>
+    <div class="container my-1">
+      <h1 class="text-center mb-1">Gallery</h1>
+
+      <!-- Sort Feature Placeholder (Visually Enhanced, Non-Functional) -->
+      <div class="d-flex justify-content-end mb-3">
+        <div class="input-group" style="width: 300px;">
+          <span class="input-group-text">Sort by</span>
+          <select id="sort" name="sort" class="form-select">
+            <option value="">Select...</option>
+            <option value="newest">Newest First</option>
+            <option value="oldest">Oldest First</option>
+          </select>
+          <button type="button" class="btn btn-danger">
+            Sort
+          </button>
+        </div>
+      </div>
+
+      <div class="row">
+        <?php 
+        if ($result && $result->num_rows > 0) {
+          while ($row = $result->fetch_assoc()) {
+            $imagePath = 'admin/' . $row['image_path'];
+            ?>
+            <div class="col-md-4 mb-4">
+              <div class="card">
+                <img 
+                  src="<?= htmlspecialchars($imagePath) ?>" 
+                  class="card-img-top" 
+                  alt="<?= htmlspecialchars($row['title']) ?>"
+                >
+                <div class="card-body">
+                  <h5 class="card-title"><?= htmlspecialchars($row['title']) ?></h5>
+                </div>
               </div>
             </div>
-          </div>
-          <?php
+            <?php
+          }
+        } else {
+          echo "<p class='text-center'>No images found in the gallery.</p>";
         }
-      } else {
-        echo "<p class='text-center'>No images found in the gallery.</p>";
-      }
-      ?>
+        ?>
+      </div>
     </div>
-  </div>
+  </main>
 
-  <!-- Footer -->
+  <!-- Footer (stays at the bottom) -->
   <footer class="bg-dark text-light py-3 text-center">
     <p>&copy; <?= date('Y') ?> Eternal Moments. All Rights Reserved.</p>
   </footer>

@@ -59,7 +59,7 @@ if (isset($_POST['login'])) {
         <div class="card">
           <div class="row g-0">
             <div class="col-md-6 col-lg-5 d-none d-md-block">
-              <img src="https://media.discordapp.net/attachments/1283308655055212607/1324250776964698112/logo.png?ex=67777824&is=677626a4&hm=b36ada0245cb57d94dbbc64de2d3184e8f362688bf7f2f7438d896d38d0622cd&=&format=webp&quality=lossless"
+              <img src="uploads/logo.png"
                 alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
             </div>
             <div class="col-md-6 col-lg-7 d-flex align-items-center">
